@@ -25,12 +25,12 @@ public class Quantifiers {
 	boolean forAllPairs() {
 		for(int x : A){
 			for(int y : B){
-				if(P(x,y)){
-					return true;
+				if(!P(x,y)){
+					return false;
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 	
 	/**************************************************************************/
@@ -51,8 +51,12 @@ public class Quantifiers {
 	/** This function computes the value of Ax.Ey.P(x,y) in the domain  A x B */
 	/**************************************************************************/
 	boolean forAllExists() {
-		//TO DO
-		return true;
+		for(int y : B){
+			if(forallX(y)){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	/**************************************************************************/
@@ -79,6 +83,14 @@ public class Quantifiers {
 			if (!P(currx,y)) {
 				return false;
 			}	
+		}
+		return true;
+	}
+	private boolean forallX(int currY) {
+		for (int x : A) {
+			if (!P(x,currY)) {
+				return false;
+			}
 		}
 		return true;
 	}
